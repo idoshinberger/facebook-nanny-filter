@@ -9,7 +9,223 @@ export type Json =
 export type Database = {
   public: {
     Tables: {
-      [_ in never]: never
+      action_logs: {
+        Row: {
+          action_details: Json | null
+          action_type: string
+          created_at: string
+          id: string
+          user_id: string
+        }
+        Insert: {
+          action_details?: Json | null
+          action_type: string
+          created_at?: string
+          id?: string
+          user_id: string
+        }
+        Update: {
+          action_details?: Json | null
+          action_type?: string
+          created_at?: string
+          id?: string
+          user_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "action_logs_user_id_fkey"
+            columns: ["user_id"]
+            isOneToOne: false
+            referencedRelation: "profiles"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      babysitters: {
+        Row: {
+          age: number | null
+          created_at: string
+          experience_years: number | null
+          facebook_id: string | null
+          friend_count: number | null
+          id: string
+          location: string | null
+          mutual_friends: number | null
+          name: string
+          profile_picture_url: string | null
+          profile_url: string | null
+          scope: string | null
+          updated_at: string
+        }
+        Insert: {
+          age?: number | null
+          created_at?: string
+          experience_years?: number | null
+          facebook_id?: string | null
+          friend_count?: number | null
+          id?: string
+          location?: string | null
+          mutual_friends?: number | null
+          name: string
+          profile_picture_url?: string | null
+          profile_url?: string | null
+          scope?: string | null
+          updated_at?: string
+        }
+        Update: {
+          age?: number | null
+          created_at?: string
+          experience_years?: number | null
+          facebook_id?: string | null
+          friend_count?: number | null
+          id?: string
+          location?: string | null
+          mutual_friends?: number | null
+          name?: string
+          profile_picture_url?: string | null
+          profile_url?: string | null
+          scope?: string | null
+          updated_at?: string
+        }
+        Relationships: []
+      }
+      profiles: {
+        Row: {
+          created_at: string
+          email: string | null
+          facebook_id: string | null
+          facebook_refresh_token: string | null
+          facebook_token: string | null
+          facebook_token_expires_at: string | null
+          id: string
+          name: string | null
+          updated_at: string
+        }
+        Insert: {
+          created_at?: string
+          email?: string | null
+          facebook_id?: string | null
+          facebook_refresh_token?: string | null
+          facebook_token?: string | null
+          facebook_token_expires_at?: string | null
+          id: string
+          name?: string | null
+          updated_at?: string
+        }
+        Update: {
+          created_at?: string
+          email?: string | null
+          facebook_id?: string | null
+          facebook_refresh_token?: string | null
+          facebook_token?: string | null
+          facebook_token_expires_at?: string | null
+          id?: string
+          name?: string | null
+          updated_at?: string
+        }
+        Relationships: []
+      }
+      search_templates: {
+        Row: {
+          age_max: number | null
+          age_min: number | null
+          area: string | null
+          created_at: string
+          experience_years: number | null
+          id: string
+          min_friends: number | null
+          name: string
+          require_picture: boolean | null
+          scope: string | null
+          updated_at: string
+          user_id: string
+        }
+        Insert: {
+          age_max?: number | null
+          age_min?: number | null
+          area?: string | null
+          created_at?: string
+          experience_years?: number | null
+          id?: string
+          min_friends?: number | null
+          name: string
+          require_picture?: boolean | null
+          scope?: string | null
+          updated_at?: string
+          user_id: string
+        }
+        Update: {
+          age_max?: number | null
+          age_min?: number | null
+          area?: string | null
+          created_at?: string
+          experience_years?: number | null
+          id?: string
+          min_friends?: number | null
+          name?: string
+          require_picture?: boolean | null
+          scope?: string | null
+          updated_at?: string
+          user_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "search_templates_user_id_fkey"
+            columns: ["user_id"]
+            isOneToOne: false
+            referencedRelation: "profiles"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      user_babysitters: {
+        Row: {
+          babysitter_id: string
+          created_at: string
+          id: string
+          message_sent_at: string | null
+          response_received_at: string | null
+          status: string
+          updated_at: string
+          user_id: string
+        }
+        Insert: {
+          babysitter_id: string
+          created_at?: string
+          id?: string
+          message_sent_at?: string | null
+          response_received_at?: string | null
+          status?: string
+          updated_at?: string
+          user_id: string
+        }
+        Update: {
+          babysitter_id?: string
+          created_at?: string
+          id?: string
+          message_sent_at?: string | null
+          response_received_at?: string | null
+          status?: string
+          updated_at?: string
+          user_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "user_babysitters_babysitter_id_fkey"
+            columns: ["babysitter_id"]
+            isOneToOne: false
+            referencedRelation: "babysitters"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "user_babysitters_user_id_fkey"
+            columns: ["user_id"]
+            isOneToOne: false
+            referencedRelation: "profiles"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
     }
     Views: {
       [_ in never]: never

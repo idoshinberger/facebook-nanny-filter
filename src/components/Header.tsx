@@ -3,12 +3,23 @@ import { useState } from 'react';
 import { Button } from '@/components/ui/button';
 import { Facebook } from 'lucide-react';
 import { Link } from 'react-router-dom';
+import { useToast } from '@/hooks/use-toast';
 
 const Header = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const { toast } = useToast();
 
   const toggleMenu = () => {
     setIsMenuOpen(!isMenuOpen);
+  };
+
+  const handleFacebookLogin = () => {
+    toast({
+      title: "Facebook Login",
+      description: "Connecting to Facebook...",
+    });
+    // In a real implementation, this would initiate the OAuth flow
+    window.location.href = '/api/auth/facebook';
   };
 
   return (
@@ -16,7 +27,7 @@ const Header = () => {
       <div className="container mx-auto px-4 py-4">
         <div className="flex items-center justify-between">
           <Link to="/" className="flex items-center space-x-2">
-            <span className="text-2xl font-bold text-primary">NannyLink</span>
+            <span className="text-2xl font-bold text-primary">SitterSync</span>
           </Link>
 
           {/* Desktop navigation */}
@@ -24,22 +35,22 @@ const Header = () => {
             <Link to="/" className="text-gray-600 hover:text-primary transition-colors">
               בית
             </Link>
-            <Link to="/nannies" className="text-gray-600 hover:text-primary transition-colors">
+            <Link to="/search" className="text-gray-600 hover:text-primary transition-colors">
               חיפוש מטפלות
             </Link>
             <Link to="/how-it-works" className="text-gray-600 hover:text-primary transition-colors">
               איך זה עובד
             </Link>
-            <Link to="/about" className="text-gray-600 hover:text-primary transition-colors">
-              אודות
+            <Link to="/dashboard" className="text-gray-600 hover:text-primary transition-colors">
+              לוח בקרה
             </Link>
           </nav>
 
           <div className="hidden md:flex items-center space-x-4">
-            <Button variant="outline" size="sm">
-              התחברות
+            <Button variant="outline" size="sm" asChild>
+              <Link to="/login">התחברות</Link>
             </Button>
-            <Button className="flex items-center gap-2" size="sm">
+            <Button className="flex items-center gap-2" size="sm" onClick={handleFacebookLogin}>
               <Facebook size={16} />
               <span>התחברות עם פייסבוק</span>
             </Button>
@@ -88,7 +99,7 @@ const Header = () => {
                 בית
               </Link>
               <Link 
-                to="/nannies" 
+                to="/search" 
                 className="text-gray-600 hover:text-primary transition-colors"
                 onClick={() => setIsMenuOpen(false)}
               >
@@ -102,17 +113,24 @@ const Header = () => {
                 איך זה עובד
               </Link>
               <Link 
-                to="/about" 
+                to="/dashboard" 
                 className="text-gray-600 hover:text-primary transition-colors"
                 onClick={() => setIsMenuOpen(false)}
               >
-                אודות
+                לוח בקרה
               </Link>
               <div className="flex flex-col space-y-2 pt-2">
-                <Button variant="outline" size="sm" className="justify-center">
-                  התחברות
+                <Button variant="outline" size="sm" className="justify-center" asChild>
+                  <Link to="/login" onClick={() => setIsMenuOpen(false)}>התחברות</Link>
                 </Button>
-                <Button className="flex items-center justify-center gap-2" size="sm">
+                <Button 
+                  className="flex items-center justify-center gap-2" 
+                  size="sm"
+                  onClick={() => {
+                    setIsMenuOpen(false);
+                    handleFacebookLogin();
+                  }}
+                >
                   <Facebook size={16} />
                   <span>התחברות עם פייסבוק</span>
                 </Button>
