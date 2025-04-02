@@ -22,7 +22,7 @@ const SearchFilters = ({ onFilterChange }: FilterProps) => {
   const [location, setLocation] = useState("");
   const [experience, setExperience] = useState(0);
   const [hourlyRate, setHourlyRate] = useState([30, 100]);
-  const [age, setAge] = useState("");
+  const [age, setAge] = useState("all");
   const [facebookFilter, setFacebookFilter] = useState(false);
   const [skills, setSkills] = useState<string[]>([]);
 
@@ -49,7 +49,7 @@ const SearchFilters = ({ onFilterChange }: FilterProps) => {
       location,
       experience,
       hourlyRate,
-      age: age ? parseInt(age) : null,
+      age: age === "all" ? null : parseInt(age),
       facebookFilter,
       skills,
     });
@@ -59,7 +59,7 @@ const SearchFilters = ({ onFilterChange }: FilterProps) => {
     setLocation("");
     setExperience(0);
     setHourlyRate([30, 100]);
-    setAge("");
+    setAge("all");
     setFacebookFilter(false);
     setSkills([]);
     onFilterChange({});
@@ -125,7 +125,7 @@ const SearchFilters = ({ onFilterChange }: FilterProps) => {
               <SelectValue placeholder="כל הגילאים" />
             </SelectTrigger>
             <SelectContent>
-              <SelectItem value="">כל הגילאים</SelectItem>
+              <SelectItem value="all">כל הגילאים</SelectItem>
               <SelectItem value="18">18-25</SelectItem>
               <SelectItem value="25">25-35</SelectItem>
               <SelectItem value="35">35-45</SelectItem>
