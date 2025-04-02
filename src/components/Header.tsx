@@ -31,7 +31,7 @@ const Header = () => {
           </Link>
 
           {/* Desktop navigation */}
-          <nav className="hidden md:flex space-x-8">
+          <nav className="hidden md:flex space-x-10">
             <Link to="/" className="text-gray-600 hover:text-primary transition-colors">
               בית
             </Link>
