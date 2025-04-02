@@ -1,7 +1,7 @@
 
 import Header from '@/components/Header';
 import Footer from '@/components/Footer';
-import { SearchFilters } from '@/components/SearchFilters';
+import SearchFilters from '@/components/SearchFilters';
 import NannyCard from '@/components/NannyCard';
 import { useState } from 'react';
 

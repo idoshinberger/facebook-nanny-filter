@@ -15,10 +15,10 @@ import { Checkbox } from "@/components/ui/checkbox";
 import { Facebook, Search } from "lucide-react";
 
 interface FilterProps {
-  onApplyFilters: (filters: any) => void;
+  onFilterChange: (filters: any) => void;
 }
 
-const SearchFilters = ({ onApplyFilters }: FilterProps) => {
+const SearchFilters = ({ onFilterChange }: FilterProps) => {
   const [location, setLocation] = useState("");
   const [experience, setExperience] = useState(0);
   const [hourlyRate, setHourlyRate] = useState([30, 100]);
@@ -45,7 +45,7 @@ const SearchFilters = ({ onApplyFilters }: FilterProps) => {
   };
 
   const handleApplyFilters = () => {
-    onApplyFilters({
+    onFilterChange({
       location,
       experience,
       hourlyRate,
@@ -62,7 +62,7 @@ const SearchFilters = ({ onApplyFilters }: FilterProps) => {
     setAge("");
     setFacebookFilter(false);
     setSkills([]);
-    onApplyFilters({});
+    onFilterChange({});
   };
 
   return (
